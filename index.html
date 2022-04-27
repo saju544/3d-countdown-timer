@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.css" />
+		<script src="./src/main.js" type="module"></script>
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>Hi</h1>
+		<template id="threed-counter">
+			<style>
+				* {
+					margin: 0;
+					padding: 0;
+					box-sizing: border-box;
+				}
+
+				:host {
+					box-sizing: border-box;
+					display: block;
+					width: fit-content;
+					font-family: sans-serif;
+					position: relative;
+					perspective: 1000px;
+					transform-style: preserve-3d;
+					--angle: 0;
+					border-radius: 1rem;
+					box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.267);
+				}
+
+				.text-wraper {
+					overflow: hidden;
+					position: relative;
+				}
+
+				.text {
+					background-color: bisque;
+					padding: 0 0.2em;
+					position: absolute;
+					/* border: 1px solid black; */
+					border-radius: 1rem;
+				}
+
+				.upper > .text {
+					top: 0;
+				}
+
+				.lower > .text {
+					bottom: 0;
+				}
+
+				.text-wraper.flip {
+					position: absolute;
+					z-index: 10;
+					top: 0;
+					transform-origin: center bottom;
+					transform: rotateX(calc(-1deg * var(--angle)));
+				}
+
+				.text-wraper.flip.back {
+					transform: rotateX(calc(-1deg * var(--angle) + 0.1deg));
+				}
+
+				.text-wraper.flip.back .text {
+					transform: rotateX(180deg);
+				}
+
+				.shadow {
+					position: absolute;
+					inset: 0;
+				}
+
+				.text-wraper.flip.back .shadow,
+				.text-wraper.flip.front .shadow,
+				.text-wraper.upper .shadow {
+					box-shadow: 0 -15px 15px -10px rgba(0, 0, 0, 0.243) inset;
+				}
+
+				.text-wraper.lower .shadow {
+					box-shadow: 0 15px 15px -10px rgba(0, 0, 0, 0.243) inset;
+				}
+
+				@keyframes flip {
+					from {
+						--angle: 0;
+					}
+					to {
+						--angle: 180;
+					}
+				}
+			</style>
+
+			<div class="text-wraper upper">
+				<div class="text"></div>
+				<div class="shadow"></div>
+			</div>
+
+			<div class="text-wraper flip back">
+				<div class="text"></div>
+				<div class="shadow"></div>
+			</div>
+
+			<div class="text-wraper flip front">
+				<div class="text"></div>
+				<div class="shadow"></div>
+			</div>
+
+			<div class="text-wraper lower">
+				<div class="text"></div>
+				<div class="shadow"></div>
+			</div>
+		</template>
+	</body>
+</html>
