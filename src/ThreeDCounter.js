@@ -47,7 +47,7 @@ export default class ThreeDCounter extends HTMLElement {
 		})
 
 		if (!isRegistered) {
-			window.CSS.registerProperty({
+			window.CSS?.registerProperty?.({
 				name: '--angle',
 				syntax: '<number>',
 				inherits: true,
@@ -63,7 +63,11 @@ export default class ThreeDCounter extends HTMLElement {
 		})
 	}
 	set(value) {
-		this.#currentValue = value.toString()
+		value = value.toString()
+		if (this.#currentValue === value) {
+			return
+		}
+		this.#currentValue = value
 		this.#upperText.textContent = this.#currentValue
 		this.#backFlipText.textContent = this.#currentValue
 		this.style.animation = 'flip 0.9s'

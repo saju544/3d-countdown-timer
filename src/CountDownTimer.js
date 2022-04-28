@@ -5,11 +5,8 @@ export default class CountDownTimer extends HTMLElement {
 	#minute
 	#second
 	#initialTimer
-	#secondValue
-	#minuteValue
-	#hourValue
 	#totalTimeInSeconds
-	constructor(initialTimer = '03:02:59') {
+	constructor(initialTimer = '24:00:00') {
 		super()
 		const root = this.attachShadow({ mode: 'open' })
 		root.append(template.content.cloneNode(true))
@@ -66,6 +63,9 @@ export default class CountDownTimer extends HTMLElement {
 			const timeEscaped = Math.round(
 				(document.timeline.currentTime - startTime) / 1000
 			)
+			if (timeEscaped === this.#totalTimeInSeconds) {
+				clearInterval(interval)
+			}
 
 			this.#update(this.#totalTimeInSeconds - timeEscaped)
 		}, 1000)
