@@ -1,5 +1,7 @@
 const tempalte = document.querySelector('#threed-counter')
 
+let isRegistered = false
+
 export default class ThreeDCounter extends HTMLElement {
 	#texts
 	#textWrpers
@@ -44,12 +46,15 @@ export default class ThreeDCounter extends HTMLElement {
 			tw.style.width = `${textWidth}px`
 		})
 
-		window.CSS.registerProperty({
-			name: '--angle',
-			syntax: '<number>',
-			inherits: true,
-			initialValue: '0',
-		})
+		if (!isRegistered) {
+			window.CSS.registerProperty({
+				name: '--angle',
+				syntax: '<number>',
+				inherits: true,
+				initialValue: '0',
+			})
+			isRegistered = true
+		}
 
 		this.addEventListener('animationend', () => {
 			this.style.animation = 'none'
