@@ -1,3 +1,5 @@
+import ThreeDCounter from './ThreeDCounter.js'
+
 const template = document.querySelector('#countdown-timer')
 
 export default class CountDownTimer extends HTMLElement {
